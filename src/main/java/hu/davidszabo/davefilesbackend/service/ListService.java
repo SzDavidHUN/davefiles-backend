@@ -4,6 +4,8 @@ import hu.davidszabo.davefilesbackend.entity.FileMeta;
 import hu.davidszabo.davefilesbackend.exception.UUIDCouldntBeFoundException;
 import hu.davidszabo.davefilesbackend.repository.FileMetaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -29,5 +31,9 @@ public class ListService {
 
     public Collection<FileMeta> getFileByFilename(String filename) {
         return fileMetaRepository.findAllByPathEndingWith(filename);
+    }
+
+    public Page<FileMeta> listAllFilesPaged(Integer pageSize, Integer page){
+        return fileMetaRepository.findAll(PageRequest.of(page, pageSize));
     }
 }
