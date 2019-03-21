@@ -33,7 +33,7 @@ public class ListService {
         return fileMetaRepository.findAllByPathEndingWith(filename);
     }
 
-    public Page<FileMeta> listAllFilesPaged(Integer pageSize, Integer page){
+    public Page<FileMeta> listAllFilesPaged(Integer pageSize, Integer page) {
         return fileMetaRepository.findAll(PageRequest.of(page, pageSize));
     }
 }

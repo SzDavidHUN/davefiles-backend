@@ -4,10 +4,8 @@ import hu.davidszabo.davefilesbackend.entity.FileMeta;
 import hu.davidszabo.davefilesbackend.exception.UUIDCouldntBeFoundException;
 import hu.davidszabo.davefilesbackend.service.ListService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Page;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 import java.util.UUID;
@@ -22,6 +20,14 @@ public class ListController {
     @GetMapping({"/all", "/", ""})
     public Collection<FileMeta> listAllFiles() {
         return listService.listAllFiles();
+    }
+
+    @GetMapping("/paged")
+    public Page<FileMeta> listAllFilesPaged(
+            @RequestParam Integer pagesize,
+            @RequestParam Integer page
+    ) {
+        return listService.listAllFilesPaged(pagesize, page);
     }
 
     @GetMapping("/uuid/{uuid}")
