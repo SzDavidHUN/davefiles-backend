@@ -1,7 +1,7 @@
 package hu.davidszabo.davefilesbackend.controller;
 
 import hu.davidszabo.davefilesbackend.exception.UUIDCouldntBeFoundException;
-import hu.davidszabo.davefilesbackend.service.ContentAnalyticsService;
+import hu.davidszabo.davefilesbackend.service.HashingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,20 +11,20 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/cac")
-public class ContentAnalitycsController {
+@RequestMapping("/hash/")
+public class HashingController {
     @Autowired
-    private ContentAnalyticsService contentAnalyticsService;
+    private HashingService hashingService;
 
     @GetMapping("/empty")
-    public void analyzeAllEmpty() {
-        contentAnalyticsService.analyzeAllEmpty();
+    public int analyzeAllEmpty() {
+        return hashingService.analyzeanalyzeAllEmpty();
     }
 
-    @GetMapping("/{uuid}")
-    public void analyzeUuid(
+    @GetMapping("/uuid/{uuid}")
+    public void analyzeUUID(
             @PathVariable UUID uuid
     ) throws UUIDCouldntBeFoundException {
-        contentAnalyticsService.analyzeUUID(uuid);
+        hashingService.analyzeUUID(uuid);
     }
 }

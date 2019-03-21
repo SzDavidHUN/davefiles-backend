@@ -1,4 +1,4 @@
-package hu.davidszabo.davefilesbackend.util.BackgroundWorkerSystem.MimeType;
+package hu.davidszabo.davefilesbackend.util.BackgroundWorkerSystem.Hashing;
 
 import hu.davidszabo.davefilesbackend.entity.FileMeta;
 import hu.davidszabo.davefilesbackend.repository.FileMetaRepository;
@@ -9,19 +9,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MimeTypeProcessingWorker extends GeneralWorker<FileMeta, MimeTypeProcessor<FileMeta>> {
-
+public class HashingWorker extends GeneralWorker<FileMeta, Hasher> {
     @Autowired
     private FileMetaRepository fileMetaRepository;
 
     @Override
     protected Logger initLogger() {
-        return LoggerFactory.getLogger(MimeTypeProcessingWorker.class);
+        return LoggerFactory.getLogger(HashingWorker.class);
     }
 
     @Override
-    protected MimeTypeProcessor initProcessor(int numberOfThread) {
-        return new MimeTypeProcessor();
+    protected Hasher initProcessor(int numberOfThread) {
+        return new Hasher();
     }
 
     @Override
@@ -31,11 +30,11 @@ public class MimeTypeProcessingWorker extends GeneralWorker<FileMeta, MimeTypePr
 
     @Override
     public String getName() {
-        return "MimeTypeProcessingService";
+        return "HashingWorker";
     }
 
     @Override
     public String getDescription() {
-        return "asd";
+        return "Worker responsible for hashing stuff";
     }
 }

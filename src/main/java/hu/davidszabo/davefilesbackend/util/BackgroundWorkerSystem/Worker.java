@@ -17,6 +17,8 @@ public interface Worker<T> {
 
     int getReamining();
 
+    void clear();
+
     String getName();
 
     String getDescription();
