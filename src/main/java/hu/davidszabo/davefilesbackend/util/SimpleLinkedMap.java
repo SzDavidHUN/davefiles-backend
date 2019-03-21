@@ -65,9 +65,7 @@ public class SimpleLinkedMap<Key, Value> implements Map<Key, Value> {
 
     @Override
     public void putAll(Map map) {
-        Iterator iterator = map.entrySet().iterator();
-        while (iterator.hasNext()) {
-            Object next = iterator.next();
+        for (Object next : map.entrySet()) {
             if (next instanceof Map.Entry)
                 put((Key) ((Entry) next).getKey(), (Value) ((Entry) next).getValue());
         }
@@ -93,7 +91,7 @@ public class SimpleLinkedMap<Key, Value> implements Map<Key, Value> {
     @Override
     public Set<Entry<Key, Value>> entrySet() {
         Set<Entry<Key, Value>> entrySet = new LinkedHashSet<>();
-        entries.forEach(entry -> entrySet.add(entry));
+        entrySet.addAll(entries);
         return entrySet;
     }
 }
